@@ -6,6 +6,56 @@
 #    Avg. HP: [VALUE]
 #    Avg. Defense: [VALUE]
 # ======= END SUMMARY =======
+#!/bin/bash
+
+FILE=$1
+LINES=$(cat FILE)
+NonLeg=0
+hp_avg=0
+hp_total=0
+hp_count=0
+d_avg=0
+d_total=0
+d_count=0
+
+#total amount of non legendaries 13
+for LINE in $LINES;
+do
+	if [$LINES[12] == "FALSE"] 
+	then 
+		$NonLeg+=1
+	fi
+done
+
+#avg hp	
+for LINE in $LINES;
+do
+	hp_total+=$LINES[5]
+	hp_count+=1
+	
+$hp_avg = $hp_total/$hp_count 
+done
+
+#avg defence 
+for LINE in $LINES;
+do
+	d_total+=$LINES[7]
+	d_count+=1
+done
+
+$d_avg = $d_total/$d_count 
+
+
+#print output
+echo "======= SUMMARY OF POKEMON.DAT ======"
+echo "   Total Non-Legendary Pokemon: $NonLeg"
+echo "   Avg. HP: $hp_avg"
+echo "   Avg. Defense: $d_avg"
+echo "======= END SUMMARY ======="
+
+
+
+
 
 # NOTE THAT YOU MUST USE AWK OR YOU WILL LOSE POINTS
 # The "Avg." values should be calculated as mean values for the corresponding columns.
